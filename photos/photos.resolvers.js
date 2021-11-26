@@ -17,12 +17,9 @@ export default {
       client.like.count({
         where: { photoId: id },
       }),
-    commentNumber: ({ id }) =>
-      client.comment.count({
-        where: { photoId: id },
-      }),
+    commentNumber: ({ id }) => client.comment.count({ where: { photoId: id } }),
     comments: ({ id }) =>
-      client.photo.findMany({
+      client.comment.findMany({
         where: { photoId: id },
         include: {
           user: true,
@@ -55,6 +52,7 @@ export default {
       return false;
     },
   },
+
   Hashtag: {
     photos: ({ id }, { page }) => {
       return client.hashtag
