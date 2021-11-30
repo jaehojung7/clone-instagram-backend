@@ -36,7 +36,7 @@ export default {
         });
         return {
           ok: true,
-          id: newComment.id
+          id: newComment.id,
         };
       }
     ),

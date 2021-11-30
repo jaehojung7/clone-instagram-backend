@@ -23,6 +23,7 @@ export default {
           },
         },
       }),
+
     isMyProfile: ({ id }, _, { loggedInUser }) => {
       if (!loggedInUser) {
         return false;
@@ -38,7 +39,20 @@ export default {
         .findUnique({ where: { username: loggedInUser.username } })
         .following({ where: { id } });
       return exists.length !== 0;
+
+      // const exists = await client.user.count({
+      //   where: {
+      //     username: loggedInUser.username,
+      //     following: {
+      //       some: {
+      //         id,
+      //       },
+      //     },
+      //   },
+      // });
+      // return Boolean(exists);
     },
     photos: ({ id }) => client.user.findUnique({ where: { id } }).photos(),
   },
 };
+
